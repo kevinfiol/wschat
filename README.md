@@ -1,3 +1,3 @@
-# wschat
+# wschat (websockets chat)
 
-dead simple example of realtime chat using websockets/ws
+Bare minimum example of realtime chat using [websockets/ws](https://github.com/websockets/ws).
