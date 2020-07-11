@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>wschat</title>
+</head>
+<body>
+    <h1>chat</h1>
+    <div id="chat">
+        <div id="messages"></div>
+        <form id="user-message-form">
+            <input type="text" id="user-message-text">
+            <button type="submit">submit</button>
+        </form>
+    </div>
+    <script>
+        const ws = new WebSocket('ws://localhost:8080/');
+
+        const $messages = document.querySelector('#messages');
+        const $form = document.querySelector('#user-message-form');
+        const $userText = document.querySelector('#user-message-text')
+
+        $form.addEventListener('submit', function(ev) {
+            ev.preventDefault();
+
+            const text = $userText.value;
+            $userText.value = '';
+            ws.send(text);
+        });
+
+        ws.onmessage = function(ev) {
+            $messages.innerHTML += `<p><pre>${ev.data}</pre></p>`
+        };
+    </script>
+</body>
+</html>
